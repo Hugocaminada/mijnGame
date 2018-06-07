@@ -114,49 +114,6 @@ var Buttonbar = (function () {
     };
     return Buttonbar;
 }());
-var Proterolevel = (function () {
-    function Proterolevel(g) {
-        this.score = -2;
-        var forground = document.getElementsByTagName("forground")[0];
-        this.game = g;
-        this.scoreElement = document.createElement('score');
-        forground.appendChild(this.scoreElement);
-        this.scoreElement.innerHTML = "Score: 0";
-        this.bubbles = [];
-        document.body.style.backgroundColor = "blue";
-        for (var i = 0; i < 10; i++) {
-            var d = new Bubble();
-            this.bubbles.push(d);
-        }
-        this.paddle = new Paddle();
-        this.paddle;
-        this.update();
-    }
-    Proterolevel.prototype.update = function () {
-        for (var _i = 0, _a = this.bubbles; _i < _a.length; _i++) {
-            var b = _a[_i];
-            var hit = this.checkCollision(this.paddle.getRectangle(), b.getRectangle());
-            if (hit) {
-                b.dead();
-                this.score++;
-                this.scoreElement.innerHTML = "Score: " + this.score;
-            }
-            if (this.score == 100) {
-                this.game.emptyScreen();
-                this.game.showScreen(new Fishlevel(this.game));
-            }
-            b.update();
-        }
-        this.paddle.update();
-    };
-    Proterolevel.prototype.checkCollision = function (a, b) {
-        return (a.left <= b.right &&
-            b.left <= a.right &&
-            a.top <= b.bottom &&
-            b.top <= a.bottom);
-    };
-    return Proterolevel;
-}());
 var Fishlevel = (function () {
     function Fishlevel(g) {
         this.gameScore = 0;
@@ -217,7 +174,7 @@ var Fishlevel = (function () {
 }());
 var Game = (function () {
     function Game() {
-        this.currentscreen = new Lizardlevel(this);
+        this.currentscreen = new Fishlevel(this);
         this.gameLoop();
     }
     Game.prototype.gameLoop = function () {
@@ -470,73 +427,5 @@ var Monkeylevel = (function () {
         this.healthbar.drawPointer(this.health);
     };
     return Monkeylevel;
-}());
-var Paddle = (function () {
-    function Paddle() {
-        var _this = this;
-        this.downSpeed = 0;
-        this.upSpeed = 0;
-        this.leftSpeed = 0;
-        this.rightSpeed = 0;
-        var forground = document.getElementsByTagName("forground")[0];
-        this.div = document.createElement("paddle");
-        forground.appendChild(this.div);
-        this.upkey = 87;
-        this.downkey = 83;
-        this.leftkey = 68;
-        this.rightkey = 65;
-        this.x = 0;
-        this.y = 200;
-        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
-        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
-    }
-    Paddle.prototype.getRectangle = function () {
-        return this.div.getBoundingClientRect();
-    };
-    Paddle.prototype.onKeyDown = function (e) {
-        switch (e.keyCode) {
-            case this.upkey:
-                this.upSpeed = 5;
-                break;
-            case this.downkey:
-                this.downSpeed = 5;
-                break;
-            case this.leftkey:
-                this.leftSpeed = 5;
-                break;
-            case this.rightkey:
-                this.rightSpeed = 5;
-                break;
-        }
-    };
-    Paddle.prototype.onKeyUp = function (e) {
-        switch (e.keyCode) {
-            case this.upkey:
-                this.upSpeed = 0;
-                break;
-            case this.downkey:
-                this.downSpeed = 0;
-                break;
-            case this.leftkey:
-                this.leftSpeed = 0;
-                break;
-            case this.rightkey:
-                this.rightSpeed = 0;
-                break;
-        }
-    };
-    Paddle.prototype.update = function () {
-        var newY = this.y - this.upSpeed + this.downSpeed;
-        var newX = this.x - this.rightSpeed + this.leftSpeed;
-        if (newY > 0 && newY + 100 < window.innerHeight)
-            this.y = newY;
-        if (newX > 0 && newX + 100 < window.innerWidth)
-            this.x = newX;
-        this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
-    };
-    Paddle.prototype.getRectangleq = function () {
-        return this.div.getBoundingClientRect();
-    };
-    return Paddle;
 }());
 //# sourceMappingURL=main.js.map
