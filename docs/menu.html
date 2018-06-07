@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EvoLife Menu</title>
+	<script type="text/javascript">
+	// Check if localstorage exists	
+	if (localStorage.getItem("startGame") !== null) {
+		window.location.href = 'index';
+	}
+	</script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body style="background: none !important;" onload="startMusic();">
+
+<div class="container">
+
+	<audio id="gameMusic" autoplay loop>
+		<source src="backgroundmusic.mp3" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
+
+	<div id="page1" class="page">
+
+		<div class="row align-items-center text-center">
+			<div class="col-md-12 text-center">
+				<img src="img/evolife.png" class="mt-1 mb-3" id="logo">
+			</div>
+		</div>
+
+		<div class="row text-center">
+			<div class="offset-3 col-6 navMenu" onclick="startGame()">
+				<p class="mt-4 mb-4">Nieuw spel</p>
+			</div>
+			<div class="offset-3 col-6 navMenu" onclick="show('page2')">
+				<p class="mt-4 mb-4">Informatie</p>
+			</div>
+			<div class="offset-3 col-6 navMenu" onclick="show('page3');">
+				<p class="mt-4 mb-4">Credits</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 fixed-bottom">
+				<input type="checkbox" name="un-mute" id="un-mute" onchange="soundControl(this)">
+				<label for="un-mute" class="unmute">
+					<img src="img/mute.svg" alt="Mute">
+				</label>
+				<label for="un-mute" class="mute">
+					<img src="img/unmute.svg" alt="Unmute">
+				</label>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="page2" class="page" style="display: none;">
+
+		<div class="row align-items-center text-center">
+			<div class="col-md-12 text-center">
+				<h1>Informatie</h1>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-8 offset-md-2">
+				<p>Deze game is door 4 gameliefhebbers gemaakt in opdracht van Hogeschool Rotterdam. Een educatieve spel waarin je een eencellige opvoed gedurende zijn evolutie naar een mens. Dit doe je door middel via een Tamagotchi achtige manier waarin je hem verzorgt<p>
+
+				<p>Dit kan je doen door:</p>
+
+				<ul>
+				  <li>Eten en drinken geven</li>
+				  <li>Met hem spelen</li>
+				  <li>Aaien</li>
+				  <li>Opvoeden</li>
+				  <li>Wassen</li>
+				  <li>Enzovoorts</li>
+				</ul>
+
+				<p>Er zijn 6 verschillende fases waarin je je organisme opvoedt. Van het allereerste organisme (eencellige) tot aan de mensheid zoals we die nu kennen.</p>
+
+				<p>Deze 6 fases zijn:</p>
+
+				<ol>
+				  <li>Eencellige / Meercellige (Water)</li>
+				  <li>Koraal (Water)</li>
+				  <li>Vis achtige (Water)</li>
+				  <li>Reptiel achtige (Land)</li>
+				  <li>Zoogdierachtige (Land)</li>
+				  <li>Mens (Land)</li>
+				</ol> 
+			</div>
+		</div>
+	
+	</div>
+
+	<div id="page3" class="page" style="display: none;">
+
+		<div class="row align-items-center text-center">
+			<div class="col-md-12 text-center">
+				<h1>Credits</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="offset-1 col-md-4 text-center">
+				<p>Berk Balik</p>
+				<p>Brainilio Imambaks-Rodrigues</p>
+			</div>
+			<div class="offset-1 col-md-4 text-center">
+				<p>Hugo Caminada</p>
+				<p>Koen Westra</p>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+<script src="./js/menu.js"></script>
+</body>
+</html>

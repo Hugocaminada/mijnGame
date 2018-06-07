@@ -1,24 +1,347 @@
-body, html {
-    margin:0; padding:0;
+body {
     width:100%; height:100%;
-    overflow: hidden;
+    background-image: url("../img/water.png");
+    margin: 0px;
+    font-family: Bradley Hand, Helvetica, sans-serif;
 }
 
-* {
-    box-sizing: border-box;
+pointer {
+    height: 50px;
+    display: block;
+    border-radius: 5px 10px 10px 5px;
+    transition: width .4s ease-in-out;
+    float: right;
+    border-left: solid black 1px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+#sleeppointer {
+    background: rgb(0, 122, 255);
+    background-image: url(../img/icons/sleep.png);   
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; 
+}
+
+#eatpointer {
+    background-color: rgb(255, 59, 48);
+    background-image: url(../img/icons/eat.png);
+}
+
+#drinkpointer {
+    background-color: rgb(90, 200, 250);
+    background-image: url(../img/icons/drink.png);
+}
+
+#exercisepointer {
+    background-color:  rgb(255, 204, 0);
+    background-image: url(../img/icons/exercise.png);
+}
+
+#playpointer {
+    background-color: rgb(255, 149, 0);
+    background-image: url(../img/icons/play.png);
+}
+
+#learnpointer {
+    background-color: rgb(88, 86, 214);
+    background-image: url(../img/icons/learn.png);
+}
+
+
+healthpointer {
+    height: 50px;
+    width: 4px;
+    background-color: black;
+    transition: transform .4s ease-in-out;
+    display: block;
+    float: right
+}
+
+bar {
+    height: 50px;
+    display: block;
+    margin: 10px;
+    border-radius: 10px;
+    border: 2px solid black;
+    max-width: 400px;
+    width:100%;    
+}
+
+#eatbar {
+    background-color: rgba(255, 59, 48, 0.3);
+    float: right;
+}
+
+#sleepbar {
+    background-color: rgba(0, 122, 255, 0.3);
+    float: left;
+}
+
+#drinkbar{
+    background-color: rgba(90, 200, 250, 0.3);
+    float: left;
+}
+
+#exercisebar{
+    background-color: rgba(255, 204, 0, 0.3);
+    float: right;
+} 
+
+#playbar {
+    background-color: rgba(255, 149, 0, 0.3);
+    float: left;
+}
+
+#learnbar {
+    background-color: rgba(88, 86, 214, 0.3);
+    float: right;
+}
+
+healthbar {
+    height: 50px;
+    border-radius: 10px;
+    border: 2px solid black;
+    background: linear-gradient(to right, #4CD964, #4CD964 50%, #FF3B30);   
+    display: block;
+    max-width: 400px;
+    margin: 10px auto;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+wrapper {
+    width:100%;
+    text-align:center;
+}
+
+animal {
+    max-width: 500px;
+    max-height: 700px;
+    padding: 20px;
+    margin: auto;
+    display:block;
+    animation: fishanimation 4s ease-in-out infinite alternate;
+}
+
+animal img {
+    width: 45vh;
+    margin: 0 auto;
+}
+
+animalname {
+    position: fixed;
+    width:100%;
+    bottom: 20%;
+    text-align: center;
+    display: inline-block;
+    font-family: Bradley Hand, Helvetica, sans-serif;
+    font-size: 40px;
+}
+
+buttonWrapper {
+    position: fixed;
+    width:100%;
+    bottom: 5%;
+    text-align: center;
+    display: inline-block;
+}
+
+button {
+    -webkit-transition-duration: 0.6s;
+    transition-duration: 0.4s;
+    height: 100px;
+    width: 100px;
+    border: none;
+    outline: none; 
+    margin: 0px 20px;
+    border-radius: 50%;
+    box-shadow: 0 9px rgba(230, 230, 230, 0.2);
+    touch-action: manipulation;
+}
+
+button img {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+button:hover{
+    -webkit-transition-duration: 0.6s;
+    transition-duration: 0.4s;
+    border: 4px solid rgb(230, 230, 230);
+}
+
+button img {
+    height: 64px;
+    width: 64px;
+}
+
+#eatbutton {
+    background-color: rgb(255, 59, 48);
+}
+
+#sleepbutton {
+    background-color: rgb(0, 122, 255);
+}
+
+#drinkbutton {
+    background-color: rgb(90, 200, 250);
+}
+
+#exercisebutton {
+    background-color: rgb(255, 204, 0);
+}
+
+#playbutton {
+    background-color: rgb(255, 149, 0);
+}
+
+#learnbutton {
+    background-color: rgb(88, 86, 214)
+}
+
+#evolvebutton {
+    background-color: rgb(252, 99, 127);
+    height: 40px;
+    width: 80px;
+    margin: 0px 0px;
+    border-radius: 3px;
+    box-shadow: 0 5px rgba(230, 230, 230, 0.2);
+}
+
+#evolvebutton:hover{
+    -webkit-transition-duration: 0.6s;
+    transition-duration: 0.4s;
+    border: 2px solid rgb(230, 230, 230);
+}
+
+#evolvebutton:active {
+    transform: translateY(5px);
+    box-shadow: 0 1px rgba(230, 230, 230, 0.2);
+  }
+
+
+button:active {
+    transform: translateY(8px);
+    box-shadow: 0 1px rgba(230, 230, 230, 0.2);
+  }
+
+@keyframes fishanimation {
+    0% {
+      transform: translateY(20px);
+    }
+    
+    100% {
+      transform: translateY(60px);
+    }
+}
+
+@media only screen and (max-width: 890px) {
+    sleepbar, eatbar {
+        float: none;
+        margin: 0 auto;
+        margin-bottom: 5px;
+        display: block;
+    }
+    healthbar {
+        max-width: 400px;
+    }
+}
+
+@media only screen and (max-width: 525px) {
+    animal img {
+        width: 32vh;
+        display: block;
+    }
+    animal {
+        padding-top: 0;
+    }
+}
+
+/*Menu START*/
+
+.navMenu{
+	width: 100%;
+	background-color: #92bd69;
+    font-size: 3.75vh;
+    color: white;
+    box-shadow: 0 4px 6px #a9a9a9,0 1px 3px rgba(0,0,0,.08)!important;
+    transition: 0.5s margin ease;
+    margin-bottom: 25px;
+    border-radius: 3.5px;
+}
+
+.navMenu:hover {
+    cursor: pointer;
+    margin-top: 8px !important;
+    transition: 0.5s box-shadow margin opacity ease;
+    box-shadow: 0 6px 5px #a9a9a9,0 1px 3px rgba(0,0,0,.08)!important;
+    opacity: 0.9;
+}
+
+input#un-mute {
+    display: none;
+}
+
+.mute img {
+    height: 5.75vh;
+    width: 5.75vh;
+}
+.unmute img {
+    display: none;
+    height: 5.75vh;
+    width: 5.75vh;
+}
+
+input#un-mute:checked ~ .unmute img {
+    display: initial;
+}
+
+input#un-mute:checked ~ .mute img {
+    display: none;
+}
+
+#logo{
+    width: auto;
+    height: 20vh;
+
+}
+
+bubble { 
+    display: block;
+    position: absolute;
+    width: 50px; 
+    height: 50px; 
+    background-color: white;
+    left:50vw;
+    animation: bubbleup 4s linear infinite, proteroanimation 4s ease-in-out infinite alternate;
+    
+    
+  }
+
+paddle {
+    background-color:black;
+    width:25px; height:100px;
+    display: block;
     position: absolute;
 }
 
-ball {
-    width: 30px; height: 30px;
-    background-color: tomato;
-    display: block;
-    border-radius: 50%
-}
+  @keyframes bubbleup {
+        0% {
+          transform: translateY(20px);
+        }
+        
+        100% {
+          transform: translateY(60px);
+        }
+    }
 
-square {
-    width: 50px; height: 30px;
-    background-color: blueviolet;
-    display: block;
-    border: 1px solid white;
-}
+  
+
+/*Menu END*/
+

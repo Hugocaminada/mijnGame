@@ -1,22 +1,32 @@
 class Game {
-    ball : Ball = new Ball
+    
+    private currentscreen: Proterolevel | Fishlevel | Lizardlevel | Mammallevel | Monkeylevel | Humanlevel
+
     constructor() {
-        
-        new Levelone
-        
+        this.currentscreen = new Lizardlevel(this)
+       
         this.gameLoop()
     }
 
-    gameLoop() : void {
-        // square updaten / verplaatsen
-       this.ball.move()
-
-        requestAnimationFrame( () => this.gameLoop())
+    private gameLoop():void{
+        this.currentscreen.update()
+        requestAnimationFrame(() => this.gameLoop())
     }
 
+    public emptyScreen(){
+        let forground = document.getElementsByTagName("forground")[0]
+        forground.innerHTML = ""
+    }
+
+    public showScreen(screen:Proterolevel |  Fishlevel | Lizardlevel | Mammallevel | Monkeylevel | Humanlevel){
+        this.currentscreen = screen
+    }
 
 }
 
 
 
-window.addEventListener("load", () => new Game())
+// load
+window.addEventListener("load", function () {
+    new Game()
+});
