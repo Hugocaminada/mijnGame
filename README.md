@@ -64,7 +64,7 @@ class GameLevelObject {
 
 Deze roep ik in elk level aan. 
 
-# peer review:
+# Peer review:
 Ik review de game van Ismail [Link](https://github.com/IsmailHusseinCR/gamepr4)
 
 - Classes zitten er duidelijk in. zo worden circle, rectangle, en square classes ieder meerdere keren aangeroepen. 
