@@ -64,8 +64,16 @@ class GameLevelObject {
 
 Deze roep ik in elk level aan. 
 
-#peer review:
+# peer review:
 Ik review de game van Ismail [Link](https://github.com/IsmailHusseinCR/gamepr4)
+
+- Classes zitten er duidelijk in. zo worden circle, rectangle, en square classes ieder meerdere keren aangeroepen. 
+
+- Encapsulation zie ik nog niet. Probeer nog een Get of een Set te gebruiken om een van je variabelen ergens anders aan te kunnen roepen
+
+- Composition zit erin. De Canvas kent alle shapes.
+
+- Overerving zit er ook in. Ismail heeft duidelijk een shapes class gemaakt waarin alle gemeenschappelijke variabelen van de shapes worden opgeslagen. 
 
 
    
