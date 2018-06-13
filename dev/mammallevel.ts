@@ -1,24 +1,15 @@
-class Mammallevel {
+/// <reference path="gamelevelobject.ts" />
 
-    private game : Game
-    private healthbar : Healthbar 
-    private animalName : HTMLElement
-    private buttonwrapper : HTMLElement
-    private eat : Buttonbar
-    private sleep : Buttonbar
-    private drink : Buttonbar
-    private exercise : Buttonbar
-    private animal : Animal
-    private health : number
-    private gameScore : number = 0
-    private scoreText : HTMLElement
-    private gameScoreElement : HTMLElement
+
+class Mammallevel extends GameLevelObject{
 
     constructor(g:Game){
+        super()
 
         this.game = g
 
-        this.healthbar = new Healthbar()
+        let game : HTMLElement = document.getElementsByTagName("game")[0] as HTMLElement
+        game.style.backgroundImage = "url('./img/backgrounds/level4.png')"
         
         let forground : Element  = document.getElementsByTagName("forground")[0]
         let leftwrapper : HTMLElement = document.createElement("leftwrapper")
@@ -33,7 +24,7 @@ class Mammallevel {
         this.scoreText.innerHTML = `Score: 0`
         this.gameScoreElement.appendChild(this.scoreText)
 
-        this.animal = new Animal("thrinaxodon")
+        new Animal("thrinaxodon")
 
         this.animalName = document.createElement("animalname")
         this.animalName.innerHTML = "Thrinaxodon"

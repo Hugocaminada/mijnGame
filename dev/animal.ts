@@ -3,7 +3,7 @@ class Animal {
     private element:HTMLElement
     private img:HTMLImageElement
 
-    constructor(species){
+    constructor(species: string){
         this.element = document.createElement("animal")
         this.img = document.createElement("img")
         this.img.src = `./img/animals/${species}_normal.png`

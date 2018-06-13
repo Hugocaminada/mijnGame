@@ -4,21 +4,16 @@ class Buttonbar {
     private button:HTMLElement
     private img: HTMLImageElement
     private pointer: HTMLElement
-    private text: HTMLElement
 
     private pointerWidth: number 
     private score: number = 50
-    private name: string
     private buttonCounter : number = 0
 
     public get getScore(): number {
 		return this.score;
 	}
 
-
     constructor(name:string, position:string){
-
-        this.name = name
 
         this.bar = document.createElement("bar")
         this.bar.id = name+"bar"
@@ -44,7 +39,6 @@ class Buttonbar {
     }
 
     public update(){
-        this.pointer.innerHTML = ""
         this.checkButtonOpacity()
         this.drawPointer()
     }
@@ -82,8 +76,8 @@ class Buttonbar {
     }
 
     private drawPointer(){
-        this.pointerWidth = this.score * 4
-        this.pointer.style.width = this.pointerWidth+"px";
+        this.pointerWidth = this.score * 1
+        this.pointer.style.width = this.pointerWidth+"%";
         if(this.score >= 100){
             this.score = 100
         }

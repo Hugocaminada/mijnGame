@@ -19,7 +19,7 @@ class Healthbar {
 
 
     public drawPointer(healthScore){
-        this.pointerPosition = healthScore * 4
+        this.pointerPosition = healthScore * (this.bar.offsetWidth / 100)
         this.healthPointer.style.transform = "translate("+-this.pointerPosition+"px)"
     }
 }

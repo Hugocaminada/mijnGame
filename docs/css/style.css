@@ -1,8 +1,24 @@
 body {
-    width:100%; height:100%;
-    background-image: url("../img/water.png");
-    margin: 0px;
+    margin: 0px; padding:0px;
     font-family: Bradley Hand, Helvetica, sans-serif;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+game {
+    background-image: url(http://localhost:57794/CLE/CLE4GAME/docs/img/backgrounds/level2.png);
+    display: block;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height: 100vh;
+}
+
+forground {
+    box-sizing: border-box;
 }
 
 pointer {
@@ -70,6 +86,18 @@ bar {
     width:100%;    
 }
 
+/* 890 px en groter */
+leftwrapper {
+    float: left;
+    width: 400px;
+}
+
+rightwrapper {
+    float: right;
+    margin-left:calc(100vw - 800px);
+    width: 400px;    
+}
+
 #eatbar {
     background-color: rgba(255, 59, 48, 0.3);
     float: right;
@@ -107,23 +135,22 @@ healthbar {
     background: linear-gradient(to right, #4CD964, #4CD964 50%, #FF3B30);   
     display: block;
     max-width: 400px;
-    margin: 10px auto;
+    margin: 0px auto;
     text-align: center;
     margin-bottom: 5px;
 }
 
-wrapper {
-    width:100%;
-    text-align:center;
-}
-
 animal {
     max-width: 500px;
-    max-height: 700px;
+    max-height: 500px;
     padding: 20px;
     margin: auto;
     display:block;
     animation: fishanimation 4s ease-in-out infinite alternate;
+}
+
+animal p {
+    font-size: 20px;
 }
 
 animal img {
@@ -132,13 +159,15 @@ animal img {
 }
 
 animalname {
-    position: fixed;
-    width:100%;
-    bottom: 20%;
+    position: absolute;
+    top: 15%;
     text-align: center;
     display: inline-block;
     font-family: Bradley Hand, Helvetica, sans-serif;
     font-size: 40px;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
 }
 
 buttonWrapper {
@@ -158,16 +187,8 @@ button {
     outline: none; 
     margin: 0px 20px;
     border-radius: 50%;
-    box-shadow: 0 9px rgba(230, 230, 230, 0.2);
+    box-shadow: 0px 9px rgba(145, 145, 145, 0.4);
     touch-action: manipulation;
-}
-
-button img {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    user-select: none;
 }
 
 button:hover{
@@ -175,6 +196,11 @@ button:hover{
     transition-duration: 0.4s;
     border: 4px solid rgb(230, 230, 230);
 }
+
+button:active {
+    transform: translateY(8px);
+    box-shadow: 0px 1px rgba(145, 145, 145, 0.4);
+  }
 
 button img {
     height: 64px;
@@ -211,7 +237,7 @@ button img {
     width: 80px;
     margin: 0px 0px;
     border-radius: 3px;
-    box-shadow: 0 5px rgba(230, 230, 230, 0.2);
+    box-shadow: 5px rgba(230, 230, 230, 0.6);
 }
 
 #evolvebutton:hover{
@@ -222,22 +248,59 @@ button img {
 
 #evolvebutton:active {
     transform: translateY(5px);
-    box-shadow: 0 1px rgba(230, 230, 230, 0.2);
+    box-shadow: 0px 1px rgba(230, 230, 230, 0.8);
   }
 
+gamescore {
+    position: fixed;
+    width: 100%;
+    bottom: 0%;
+    text-align: center;
+}
 
-button:active {
-    transform: translateY(8px);
-    box-shadow: 0 1px rgba(230, 230, 230, 0.2);
-  }
+  /* The Modal (background) */
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(59, 59, 59, 0.88); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    font-size: 20px;
+    color: white;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.modal-content p {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 500px;
+    display: block;
+}
+
+.modal-content img {
+    height: 40vh;
+    display: block;
+    margin: 0 auto;
+}
 
 @keyframes fishanimation {
     0% {
-      transform: translateY(20px);
+      transform: translateY(0px);
     }
     
     100% {
-      transform: translateY(60px);
+      transform: translateY(40px);
     }
 }
 
@@ -251,19 +314,65 @@ button:active {
     healthbar {
         max-width: 400px;
     }
-}
-
-@media only screen and (max-width: 525px) {
+    leftwrapper {
+        max-width: 45%;
+    }
+    
+    rightwrapper {
+        max-width: 45%;
+        margin-left: 0;
+    }
     animal img {
-        width: 32vh;
+        width: 30vh;
         display: block;
     }
     animal {
         padding-top: 0;
+        touch-action: manipulation;
+    }
+    button img {
+        height: 2vh;
+        width: 2vh;
+    }
+    button {
+        height: 6vh;
+        width: 6vh;
+        margin: 1vh;
+    }
+    animalname {
+        font-size: 3vh;
     }
 }
 
-/*Menu START*/
+@media only screen and (max-width: 1102px) {
+    animalname {
+        position: inherit;
+        text-align: center;
+        display: inline-block;
+        font-family: Bradley Hand, Helvetica, sans-serif;
+        font-size: 40px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 525px) {
+
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+}
+
+#arrow{
+    height: 7vh;
+    width: 7vh;
+    cursor: pointer;
+}
 
 .navMenu{
 	width: 100%;

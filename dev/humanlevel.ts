@@ -1,23 +1,15 @@
-class Humanlevel {
+/// <reference path="gamelevelobject.ts" />
 
-    private game : Game
-    private healthbar : Healthbar 
-    private animalName : HTMLElement
-    private buttonwrapper : HTMLElement
-    private eat : Buttonbar
-    private sleep : Buttonbar
-    private drink : Buttonbar
-    private exercise : Buttonbar
-    private play : Buttonbar
-    private learn : Buttonbar
-    private animal : Animal
-    private health : number
+
+class Humanlevel extends GameLevelObject{
 
     constructor(g:Game){
+        super()
 
         this.game = g
 
-        this.healthbar = new Healthbar()
+        let game : HTMLElement = document.getElementsByTagName("game")[0] as HTMLElement
+        game.style.backgroundImage = "url('./img/backgrounds/level6.png')"
         
         let forground : Element  = document.getElementsByTagName("forground")[0]
         let leftwrapper : HTMLElement = document.createElement("leftwrapper")
@@ -26,11 +18,17 @@ class Humanlevel {
         let rightwrapper : HTMLElement = document.createElement("rightwrapper")
         forground.appendChild(rightwrapper)
 
-        this.animal = new Animal("darwin")
+        this.gameScoreElement = document.createElement("gamescore")
+        forground.appendChild(this.gameScoreElement)
+        this.scoreText = document.createElement("p")
+        this.scoreText.innerHTML = `Score: 0`
+        this.gameScoreElement.appendChild(this.scoreText)
 
         this.animalName = document.createElement("animalname")
         this.animalName.innerHTML = "Homo Sapien"
         forground.appendChild(this.animalName)
+
+        new Animal("darwinbody")
 
         this.buttonwrapper = document.createElement("buttonwrapper")
         forground.appendChild(this.buttonwrapper)
@@ -43,6 +41,17 @@ class Humanlevel {
         this.play = new Buttonbar("play", "left")
         this.learn = new Buttonbar("learn", "right")
 
+        this.updateGameScore()
+    }
+
+    private updateGameScore(){
+        setTimeout(() => {
+            if(this.health > 80){
+                this.gameScore += 1
+                this.scoreText.innerHTML = `Score: ${this.gameScore}`
+            }
+            this.updateGameScore()  
+        }, 100)
     }
 
     public update() {
