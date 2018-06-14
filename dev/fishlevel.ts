@@ -1,77 +1,20 @@
-/// <reference path="gamelevelobject.ts" />
+/// <reference path="level.ts" />
 
+class Fishlevel extends Level{
 
-class Fishlevel extends GameLevelObject{
+    protected sleep : Buttonbar
+    protected eat : Buttonbar
 
-    constructor(g:Game){
-        super()
+    constructor(backgroundImage: string, animalName: string, g:Game){
+        super(backgroundImage, animalName, g)
 
-        this.game = g
-
-        let game : HTMLElement = document.getElementsByTagName("game")[0] as HTMLElement
-        game.style.backgroundImage = "url('./img/backgrounds/level2.png')"
-
-        let forground : Element  = document.getElementsByTagName("forground")[0]
-        
-        this.modal = new Modal()
-        let modalContainer = document.getElementsByClassName("modal-content")[0]
-        this.textfield = document.createElement("p")
-        modalContainer.appendChild(this.textfield)
-        this.textfield.innerHTML = this.text
-
-        let leftwrapper : HTMLElement = document.createElement("leftwrapper")
-        forground.appendChild(leftwrapper)
-        
-        let rightwrapper : HTMLElement = document.createElement("rightwrapper")
-        forground.appendChild(rightwrapper)
-
-        this.animalName = document.createElement("animalname")
-        this.animalName.innerHTML = "Cephalaspis"
-        forground.appendChild(this.animalName)
-
-        new Animal("fish")
-
-        this.buttonwrapper = document.createElement("buttonwrapper")
-        forground.appendChild(this.buttonwrapper)
-        
         this.sleep = new Buttonbar("sleep", "left")
         this.eat = new Buttonbar("eat", "right")
-
-        this.gameScoreElement = document.createElement("gamescore")
-        forground.appendChild(this.gameScoreElement)
-        this.scoreText = document.createElement("p")
-        this.scoreText.innerHTML = `Score: 0`
-        this.gameScoreElement.appendChild(this.scoreText)
-
-        this.updateGameScore()
-
-        window.addEventListener("click", (e:Event) => this.changeText());
     }
 
-    private updateGameScore(){
-        setTimeout(() => {
-            if(this.health > 80){
-                this.gameScore += 1
-                this.scoreText.innerHTML = `Score: ${this.gameScore}`
-                if(this.gameScore === 100){   
-                    this.createButton() 
-                }
-            }
-            this.updateGameScore()  
-        }, 100)
-    }
-
-    private createButton(){
-        let button = document.createElement("button")
-        button.id = "evolvebutton"
-        button.innerHTML = "Evolueer!"
-        this.gameScoreElement.appendChild(button)
-        button.addEventListener("click", (e:Event) => this.changeLevel());
-    }
-
-    private changeLevel(){
+    protected changeLevel(){
         this.game.emptyScreen()
-        this.game.showScreen(new Lizardlevel(this.game))
+        this.game.showScreen(new Lizardlevel("level3", "Tiktaalik", this.game))
     }
 
     public update() {
@@ -81,7 +24,7 @@ class Fishlevel extends GameLevelObject{
         this.healthbar.drawPointer(this.health)
     }
     
-    private changeText(){
+    protected changeText(){
         this.counter += 1
 
         switch(this.counter) {
@@ -117,10 +60,7 @@ class Fishlevel extends GameLevelObject{
                 break
         }
         this.updateText(this.text)
-    }
-
-    private updateText(text: string){
-        this.textfield.innerHTML = text
+        console.log(this.counter)
     }
 
 }

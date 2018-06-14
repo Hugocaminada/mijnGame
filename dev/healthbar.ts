@@ -13,13 +13,11 @@ class Healthbar {
 
         this.healthPointer = document.createElement("healthpointer")
         this.bar.appendChild(this.healthPointer)
-
-        //this.bar.innerHTML = "<p>Gezondheid</p>"
     }
 
 
     public drawPointer(healthScore){
-        this.pointerPosition = healthScore * (this.bar.offsetWidth / 100)
+        this.pointerPosition = healthScore * 4
         this.healthPointer.style.transform = "translate("+-this.pointerPosition+"px)"
     }
 }

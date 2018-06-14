@@ -1,50 +1,19 @@
-/// <reference path="gamelevelobject.ts" />
+/// <reference path="monkeylevel.ts" />
 
 
-class Humanlevel extends GameLevelObject{
+class Humanlevel extends Monkeylevel{
 
-    constructor(g:Game){
-        super()
+    protected learn : Buttonbar
 
-        this.game = g
+    constructor(backgroundImage: string, animalName: string, g:Game){
+        super(backgroundImage, animalName, g)
 
-        let game : HTMLElement = document.getElementsByTagName("game")[0] as HTMLElement
-        game.style.backgroundImage = "url('./img/backgrounds/level6.png')"
-        
-        let forground : Element  = document.getElementsByTagName("forground")[0]
-        let leftwrapper : HTMLElement = document.createElement("leftwrapper")
-        forground.appendChild(leftwrapper)
-        
-        let rightwrapper : HTMLElement = document.createElement("rightwrapper")
-        forground.appendChild(rightwrapper)
-
-        this.gameScoreElement = document.createElement("gamescore")
-        forground.appendChild(this.gameScoreElement)
-        this.scoreText = document.createElement("p")
-        this.scoreText.innerHTML = `Score: 0`
-        this.gameScoreElement.appendChild(this.scoreText)
-
-        this.animalName = document.createElement("animalname")
-        this.animalName.innerHTML = "Homo Sapien"
-        forground.appendChild(this.animalName)
-
-        new Animal("darwinbody")
-
-        this.buttonwrapper = document.createElement("buttonwrapper")
-        forground.appendChild(this.buttonwrapper)
-        
-        
-        this.sleep = new Buttonbar("sleep", "left")
-        this.eat = new Buttonbar("eat", "right")
-        this.drink = new Buttonbar("drink", "left")
-        this.exercise = new Buttonbar("exercise", "right") 
-        this.play = new Buttonbar("play", "left")
         this.learn = new Buttonbar("learn", "right")
 
         this.updateGameScore()
     }
 
-    private updateGameScore(){
+    protected updateGameScore(){
         setTimeout(() => {
             if(this.health > 80){
                 this.gameScore += 1
@@ -52,6 +21,10 @@ class Humanlevel extends GameLevelObject{
             }
             this.updateGameScore()  
         }, 100)
+    }
+
+    protected createButton(){
+
     }
 
     public update() {
@@ -66,6 +39,10 @@ class Humanlevel extends GameLevelObject{
         this.healthbar.drawPointer(this.health)
     }
 
+    protected changeText(){
 
+        this.modal.closeModalByWindow()
+
+    }
 
 }

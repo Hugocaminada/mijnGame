@@ -98,50 +98,41 @@ var Buttonbar = (function () {
     };
     return Buttonbar;
 }());
-var GameLevelObject = (function () {
-    function GameLevelObject() {
+var Level = (function () {
+    function Level(backgroundImage, animalName, g) {
+        var _this = this;
         this.gameScore = 0;
         this.text = "Hoi daar ben ik weer!";
         this.counter = 0;
+        this.game = g;
         this.healthbar = new Healthbar();
-    }
-    return GameLevelObject;
-}());
-var Fishlevel = (function (_super) {
-    __extends(Fishlevel, _super);
-    function Fishlevel(g) {
-        var _this = _super.call(this) || this;
-        _this.game = g;
-        var game = document.getElementsByTagName("game")[0];
-        game.style.backgroundImage = "url('./img/backgrounds/level2.png')";
+        var background = document.getElementsByTagName("game")[0];
+        background.style.backgroundImage = "url('./img/backgrounds/" + backgroundImage + ".png')";
         var forground = document.getElementsByTagName("forground")[0];
-        _this.modal = new Modal();
+        this.modal = new Modal();
         var modalContainer = document.getElementsByClassName("modal-content")[0];
-        _this.textfield = document.createElement("p");
-        modalContainer.appendChild(_this.textfield);
-        _this.textfield.innerHTML = _this.text;
+        this.textfield = document.createElement("p");
+        modalContainer.appendChild(this.textfield);
+        this.textfield.innerHTML = this.text;
         var leftwrapper = document.createElement("leftwrapper");
         forground.appendChild(leftwrapper);
         var rightwrapper = document.createElement("rightwrapper");
         forground.appendChild(rightwrapper);
-        _this.animalName = document.createElement("animalname");
-        _this.animalName.innerHTML = "Cephalaspis";
-        forground.appendChild(_this.animalName);
-        new Animal("fish");
-        _this.buttonwrapper = document.createElement("buttonwrapper");
-        forground.appendChild(_this.buttonwrapper);
-        _this.sleep = new Buttonbar("sleep", "left");
-        _this.eat = new Buttonbar("eat", "right");
-        _this.gameScoreElement = document.createElement("gamescore");
-        forground.appendChild(_this.gameScoreElement);
-        _this.scoreText = document.createElement("p");
-        _this.scoreText.innerHTML = "Score: 0";
-        _this.gameScoreElement.appendChild(_this.scoreText);
-        _this.updateGameScore();
+        this.animalName = document.createElement("animalname");
+        this.animalName.innerHTML = animalName;
+        forground.appendChild(this.animalName);
+        new Animal(animalName);
+        this.buttonwrapper = document.createElement("buttonwrapper");
+        forground.appendChild(this.buttonwrapper);
+        this.gameScoreElement = document.createElement("gamescore");
+        forground.appendChild(this.gameScoreElement);
+        this.scoreText = document.createElement("p");
+        this.scoreText.innerHTML = "Score: 0";
+        this.gameScoreElement.appendChild(this.scoreText);
+        this.updateGameScore();
         window.addEventListener("click", function (e) { return _this.changeText(); });
-        return _this;
     }
-    Fishlevel.prototype.updateGameScore = function () {
+    Level.prototype.updateGameScore = function () {
         var _this = this;
         setTimeout(function () {
             if (_this.health > 80) {
@@ -154,7 +145,7 @@ var Fishlevel = (function (_super) {
             _this.updateGameScore();
         }, 100);
     };
-    Fishlevel.prototype.createButton = function () {
+    Level.prototype.createButton = function () {
         var _this = this;
         var button = document.createElement("button");
         button.id = "evolvebutton";
@@ -162,9 +153,28 @@ var Fishlevel = (function (_super) {
         this.gameScoreElement.appendChild(button);
         button.addEventListener("click", function (e) { return _this.changeLevel(); });
     };
+    Level.prototype.changeLevel = function () {
+    };
+    Level.prototype.update = function () {
+    };
+    Level.prototype.changeText = function () {
+    };
+    Level.prototype.updateText = function (text) {
+        this.textfield.innerHTML = text;
+    };
+    return Level;
+}());
+var Fishlevel = (function (_super) {
+    __extends(Fishlevel, _super);
+    function Fishlevel(backgroundImage, animalName, g) {
+        var _this = _super.call(this, backgroundImage, animalName, g) || this;
+        _this.sleep = new Buttonbar("sleep", "left");
+        _this.eat = new Buttonbar("eat", "right");
+        return _this;
+    }
     Fishlevel.prototype.changeLevel = function () {
         this.game.emptyScreen();
-        this.game.showScreen(new Lizardlevel(this.game));
+        this.game.showScreen(new Lizardlevel("level3", "Tiktaalik", this.game));
     };
     Fishlevel.prototype.update = function () {
         this.health = (this.eat.getScore + this.sleep.getScore) / 2;
@@ -207,15 +217,13 @@ var Fishlevel = (function (_super) {
                 break;
         }
         this.updateText(this.text);
-    };
-    Fishlevel.prototype.updateText = function (text) {
-        this.textfield.innerHTML = text;
+        console.log(this.counter);
     };
     return Fishlevel;
-}(GameLevelObject));
+}(Level));
 var Game = (function () {
     function Game() {
-        this.currentscreen = new Fishlevel(this);
+        this.currentscreen = new Fishlevel("level2", "Cephalaspis", this);
         this.gameLoop();
     }
     Game.prototype.gameLoop = function () {
@@ -244,39 +252,109 @@ var Healthbar = (function () {
         this.bar.appendChild(this.healthPointer);
     }
     Healthbar.prototype.drawPointer = function (healthScore) {
-        this.pointerPosition = healthScore * (this.bar.offsetWidth / 100);
+        this.pointerPosition = healthScore * 4;
         this.healthPointer.style.transform = "translate(" + -this.pointerPosition + "px)";
     };
     return Healthbar;
 }());
+var Lizardlevel = (function (_super) {
+    __extends(Lizardlevel, _super);
+    function Lizardlevel(backgroundImage, animalName, g) {
+        var _this = _super.call(this, backgroundImage, animalName, g) || this;
+        _this.drink = new Buttonbar("drink", "left");
+        return _this;
+    }
+    Lizardlevel.prototype.changeLevel = function () {
+        this.game.emptyScreen();
+        this.game.showScreen(new Mammallevel("level4", "Thrinaxodon", this.game));
+    };
+    Lizardlevel.prototype.update = function () {
+        this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore) / 3;
+        this.eat.update();
+        this.sleep.update();
+        this.drink.update();
+        this.healthbar.drawPointer(this.health);
+    };
+    Lizardlevel.prototype.changeText = function () {
+        this.counter += 1;
+        switch (this.counter) {
+            case 1:
+                this.text = "hoiiiii";
+                break;
+            case 2:
+                this.modal.closeModalByWindow();
+                break;
+        }
+        console.log(this.counter);
+        this.updateText(this.text);
+    };
+    return Lizardlevel;
+}(Fishlevel));
+var Mammallevel = (function (_super) {
+    __extends(Mammallevel, _super);
+    function Mammallevel(backgroundImage, animalName, g) {
+        var _this = _super.call(this, backgroundImage, animalName, g) || this;
+        _this.exercise = new Buttonbar("exercise", "right");
+        return _this;
+    }
+    Mammallevel.prototype.changeLevel = function () {
+        this.game.emptyScreen();
+        this.game.showScreen(new Monkeylevel("level5", "Procunsul", this.game));
+    };
+    Mammallevel.prototype.update = function () {
+        this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore + this.exercise.getScore) / 4;
+        this.eat.update();
+        this.sleep.update();
+        this.drink.update();
+        this.exercise.update();
+        this.healthbar.drawPointer(this.health);
+    };
+    Mammallevel.prototype.changeText = function () {
+        this.counter += 1;
+        switch (this.counter) {
+            case 1:
+                this.modal.closeModalByWindow();
+                break;
+        }
+        this.updateText(this.text);
+    };
+    return Mammallevel;
+}(Lizardlevel));
+var Monkeylevel = (function (_super) {
+    __extends(Monkeylevel, _super);
+    function Monkeylevel(backgroundImage, animalName, g) {
+        var _this = _super.call(this, backgroundImage, animalName, g) || this;
+        _this.play = new Buttonbar("play", "left");
+        return _this;
+    }
+    Monkeylevel.prototype.changeLevel = function () {
+        this.game.emptyScreen();
+        this.game.showScreen(new Humanlevel("level 6", "Homo Sapien", this.game));
+    };
+    Monkeylevel.prototype.update = function () {
+        this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore + this.exercise.getScore + this.play.getScore) / 5;
+        this.eat.update();
+        this.sleep.update();
+        this.drink.update();
+        this.exercise.update();
+        this.play.update();
+        this.healthbar.drawPointer(this.health);
+    };
+    Monkeylevel.prototype.changeText = function () {
+        this.counter += 1;
+        switch (this.counter) {
+            case 1:
+                this.modal.closeModalByWindow();
+                break;
+        }
+        this.updateText(this.text);
+    };
+    return Monkeylevel;
+}(Mammallevel));
 var Humanlevel = (function (_super) {
     __extends(Humanlevel, _super);
-    function Humanlevel(g) {
-        var _this = _super.call(this) || this;
-        _this.game = g;
-        var game = document.getElementsByTagName("game")[0];
-        game.style.backgroundImage = "url('./img/backgrounds/level6.png')";
-        var forground = document.getElementsByTagName("forground")[0];
-        var leftwrapper = document.createElement("leftwrapper");
-        forground.appendChild(leftwrapper);
-        var rightwrapper = document.createElement("rightwrapper");
-        forground.appendChild(rightwrapper);
-        _this.gameScoreElement = document.createElement("gamescore");
-        forground.appendChild(_this.gameScoreElement);
-        _this.scoreText = document.createElement("p");
-        _this.scoreText.innerHTML = "Score: 0";
-        _this.gameScoreElement.appendChild(_this.scoreText);
-        _this.animalName = document.createElement("animalname");
-        _this.animalName.innerHTML = "Homo Sapien";
-        forground.appendChild(_this.animalName);
-        new Animal("darwinbody");
-        _this.buttonwrapper = document.createElement("buttonwrapper");
-        forground.appendChild(_this.buttonwrapper);
-        _this.sleep = new Buttonbar("sleep", "left");
-        _this.eat = new Buttonbar("eat", "right");
-        _this.drink = new Buttonbar("drink", "left");
-        _this.exercise = new Buttonbar("exercise", "right");
-        _this.play = new Buttonbar("play", "left");
+    function Humanlevel(backgroundImage, animalName, g) {
+        var _this = _super.call(this, backgroundImage, animalName, g) || this;
         _this.learn = new Buttonbar("learn", "right");
         _this.updateGameScore();
         return _this;
@@ -291,6 +369,8 @@ var Humanlevel = (function (_super) {
             _this.updateGameScore();
         }, 100);
     };
+    Humanlevel.prototype.createButton = function () {
+    };
     Humanlevel.prototype.update = function () {
         this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore + this.exercise.getScore + this.play.getScore + this.learn.getScore) / 6;
         this.eat.update();
@@ -301,136 +381,11 @@ var Humanlevel = (function (_super) {
         this.learn.update();
         this.healthbar.drawPointer(this.health);
     };
+    Humanlevel.prototype.changeText = function () {
+        this.modal.closeModalByWindow();
+    };
     return Humanlevel;
-}(GameLevelObject));
-var Lizardlevel = (function (_super) {
-    __extends(Lizardlevel, _super);
-    function Lizardlevel(g) {
-        var _this = _super.call(this) || this;
-        _this.game = g;
-        var game = document.getElementsByTagName("game")[0];
-        game.style.backgroundImage = "url('./img/backgrounds/level3.png')";
-        var forground = document.getElementsByTagName("forground")[0];
-        var leftwrapper = document.createElement("leftwrapper");
-        forground.appendChild(leftwrapper);
-        var rightwrapper = document.createElement("rightwrapper");
-        forground.appendChild(rightwrapper);
-        _this.gameScoreElement = document.createElement("gamescore");
-        forground.appendChild(_this.gameScoreElement);
-        _this.scoreText = document.createElement("p");
-        _this.scoreText.innerHTML = "Score: 0";
-        _this.gameScoreElement.appendChild(_this.scoreText);
-        new Animal("Tiktaalik");
-        _this.animalName = document.createElement("animalname");
-        _this.animalName.innerHTML = "Tiktaalik";
-        forground.appendChild(_this.animalName);
-        _this.buttonwrapper = document.createElement("buttonwrapper");
-        forground.appendChild(_this.buttonwrapper);
-        _this.sleep = new Buttonbar("sleep", "left");
-        _this.eat = new Buttonbar("eat", "right");
-        _this.drink = new Buttonbar("drink", "left");
-        _this.updateGameScore();
-        return _this;
-    }
-    Lizardlevel.prototype.updateGameScore = function () {
-        var _this = this;
-        setTimeout(function () {
-            if (_this.health > 80) {
-                _this.gameScore += 1;
-                _this.scoreText.innerHTML = "Score: " + _this.gameScore;
-                if (_this.gameScore === 100) {
-                    _this.createButton();
-                }
-            }
-            _this.updateGameScore();
-        }, 100);
-    };
-    Lizardlevel.prototype.createButton = function () {
-        var _this = this;
-        var button = document.createElement("button");
-        button.id = "evolvebutton";
-        button.innerHTML = "Evolueer!";
-        this.gameScoreElement.appendChild(button);
-        button.addEventListener("click", function (e) { return _this.changeLevel(); });
-    };
-    Lizardlevel.prototype.changeLevel = function () {
-        this.game.emptyScreen();
-        this.game.showScreen(new Mammallevel(this.game));
-    };
-    Lizardlevel.prototype.update = function () {
-        this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore) / 3;
-        this.eat.update();
-        this.sleep.update();
-        this.drink.update();
-        this.healthbar.drawPointer(this.health);
-    };
-    return Lizardlevel;
-}(GameLevelObject));
-var Mammallevel = (function (_super) {
-    __extends(Mammallevel, _super);
-    function Mammallevel(g) {
-        var _this = _super.call(this) || this;
-        _this.game = g;
-        var game = document.getElementsByTagName("game")[0];
-        game.style.backgroundImage = "url('./img/backgrounds/level4.png')";
-        var forground = document.getElementsByTagName("forground")[0];
-        var leftwrapper = document.createElement("leftwrapper");
-        forground.appendChild(leftwrapper);
-        var rightwrapper = document.createElement("rightwrapper");
-        forground.appendChild(rightwrapper);
-        _this.gameScoreElement = document.createElement("gamescore");
-        forground.appendChild(_this.gameScoreElement);
-        _this.scoreText = document.createElement("p");
-        _this.scoreText.innerHTML = "Score: 0";
-        _this.gameScoreElement.appendChild(_this.scoreText);
-        new Animal("thrinaxodon");
-        _this.animalName = document.createElement("animalname");
-        _this.animalName.innerHTML = "Thrinaxodon";
-        forground.appendChild(_this.animalName);
-        _this.buttonwrapper = document.createElement("buttonwrapper");
-        forground.appendChild(_this.buttonwrapper);
-        _this.sleep = new Buttonbar("sleep", "left");
-        _this.eat = new Buttonbar("eat", "right");
-        _this.drink = new Buttonbar("drink", "left");
-        _this.exercise = new Buttonbar("exercise", "right");
-        _this.updateGameScore();
-        return _this;
-    }
-    Mammallevel.prototype.updateGameScore = function () {
-        var _this = this;
-        setTimeout(function () {
-            if (_this.health > 80) {
-                _this.gameScore += 1;
-                _this.scoreText.innerHTML = "Score: " + _this.gameScore;
-                if (_this.gameScore === 100) {
-                    _this.createButton();
-                }
-            }
-            _this.updateGameScore();
-        }, 100);
-    };
-    Mammallevel.prototype.createButton = function () {
-        var _this = this;
-        var button = document.createElement("button");
-        button.id = "evolvebutton";
-        button.innerHTML = "Evolueer!";
-        this.gameScoreElement.appendChild(button);
-        button.addEventListener("click", function (e) { return _this.changeLevel(); });
-    };
-    Mammallevel.prototype.changeLevel = function () {
-        this.game.emptyScreen();
-        this.game.showScreen(new Monkeylevel(this.game));
-    };
-    Mammallevel.prototype.update = function () {
-        this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore + this.exercise.getScore) / 4;
-        this.eat.update();
-        this.sleep.update();
-        this.drink.update();
-        this.exercise.update();
-        this.healthbar.drawPointer(this.health);
-    };
-    return Mammallevel;
-}(GameLevelObject));
+}(Monkeylevel));
 var Modal = (function () {
     function Modal() {
         this.modal = document.createElement("div");
@@ -450,71 +405,4 @@ var Modal = (function () {
     };
     return Modal;
 }());
-var Monkeylevel = (function (_super) {
-    __extends(Monkeylevel, _super);
-    function Monkeylevel(g) {
-        var _this = _super.call(this) || this;
-        _this.game = g;
-        var game = document.getElementsByTagName("game")[0];
-        game.style.backgroundImage = "url('./img/backgrounds/level5.png')";
-        var forground = document.getElementsByTagName("forground")[0];
-        var leftwrapper = document.createElement("leftwrapper");
-        forground.appendChild(leftwrapper);
-        var rightwrapper = document.createElement("rightwrapper");
-        forground.appendChild(rightwrapper);
-        _this.gameScoreElement = document.createElement("gamescore");
-        forground.appendChild(_this.gameScoreElement);
-        _this.scoreText = document.createElement("p");
-        _this.scoreText.innerHTML = "Score: 0";
-        _this.gameScoreElement.appendChild(_this.scoreText);
-        _this.animalName = document.createElement("animalname");
-        _this.animalName.innerHTML = "Procunsul";
-        forground.appendChild(_this.animalName);
-        new Animal("procunsul");
-        _this.buttonwrapper = document.createElement("buttonwrapper");
-        forground.appendChild(_this.buttonwrapper);
-        _this.sleep = new Buttonbar("sleep", "left");
-        _this.eat = new Buttonbar("eat", "right");
-        _this.drink = new Buttonbar("drink", "left");
-        _this.exercise = new Buttonbar("exercise", "right");
-        _this.play = new Buttonbar("play", "left");
-        _this.updateGameScore();
-        return _this;
-    }
-    Monkeylevel.prototype.updateGameScore = function () {
-        var _this = this;
-        setTimeout(function () {
-            if (_this.health > 80) {
-                _this.gameScore += 1;
-                _this.scoreText.innerHTML = "Score: " + _this.gameScore;
-                if (_this.gameScore === 100) {
-                    _this.createButton();
-                }
-            }
-            _this.updateGameScore();
-        }, 100);
-    };
-    Monkeylevel.prototype.createButton = function () {
-        var _this = this;
-        var button = document.createElement("button");
-        button.id = "evolvebutton";
-        button.innerHTML = "Evolueer!";
-        this.gameScoreElement.appendChild(button);
-        button.addEventListener("click", function (e) { return _this.changeLevel(); });
-    };
-    Monkeylevel.prototype.changeLevel = function () {
-        this.game.emptyScreen();
-        this.game.showScreen(new Humanlevel(this.game));
-    };
-    Monkeylevel.prototype.update = function () {
-        this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore + this.exercise.getScore + this.play.getScore) / 5;
-        this.eat.update();
-        this.sleep.update();
-        this.drink.update();
-        this.exercise.update();
-        this.play.update();
-        this.healthbar.drawPointer(this.health);
-    };
-    return Monkeylevel;
-}(GameLevelObject));
 //# sourceMappingURL=main.js.map

@@ -19,7 +19,6 @@ class Modal {
         this.modal.appendChild(modalContent)
         modalContent.appendChild(img)
         
-       //window.addEventListener("click", (e:Event) => this.closeModalByWindow());
     }
 
     public closeModalByWindow() {

@@ -1,9 +1,9 @@
 class Game {
     
-    private currentscreen: Fishlevel | Lizardlevel | Mammallevel | Monkeylevel | Humanlevel 
+    private currentscreen: Level 
 
     constructor() {
-        this.currentscreen = new Fishlevel(this)
+        this.currentscreen = new Fishlevel("level2", "Cephalaspis", this)
        
         this.gameLoop()
     }
@@ -18,7 +18,7 @@ class Game {
         forground.innerHTML = ""
     }
 
-    public showScreen(screen: Fishlevel | Lizardlevel | Mammallevel | Monkeylevel | Humanlevel){
+    public showScreen(screen: Level){
         this.currentscreen = screen
     }
 

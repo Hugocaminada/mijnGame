@@ -33,7 +33,7 @@ class Buttonbar {
         this.img.src = "img/icons/"+name+".png"
         this.button.appendChild(this.img)
 
-        this.button.addEventListener("click", (e:Event) => this.buttonClickChecker());
+        this.button.addEventListener("click", (e:Event) => this.buttonClickChecker())
 
         this.lowerScore()
     }
