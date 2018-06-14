@@ -1,11 +1,13 @@
 # EVOLIFE
 Deze game heb ik gemaakt voor CLE4.
 Aangezien ik alle typescript heb geschreven voor deze levels, dien ik deze levels ook in voor mijn Programmeer opdracht. 
+Het is een Tamagotchi-achtig spel waarin de evolutie wordt gesimuleerd. Charles Darwin leidt je door elk level heen om je dingen uit te leggen over de evolutie.
+Er zijn 5 levels te spelen. Als eerste speel je als de eerste vis-achtige, daarna ga je over naar de eerste reptiel-achtige, en zo door langs de eerste zoogdier, naar de aap en vervolgens de mens.
 
 # Classes
 
 Ik heb veel verschillende Classes toegevoegd.
-Ik heb bijvoorbeeld de class 'Buttonbar' bedacht voor alle buttons en hun corresponderende progress bars. Hier roep ik er elk level een van op elke keer met een andere waarde. Aan de hand van die waarde krijgen ze hun eigen kleur, icoon en score in de game.
+Ik heb bijvoorbeeld de class <code>Buttonbar</code> bedacht voor alle buttons en hun corresponderende progress bars. Hier roep ik er elk level een van op elke keer met een andere waarde. Aan de hand van die waarde krijgen ze hun eigen kleur, icoon en score in het spel.
 
     this.sleep = new Buttonbar("sleep", "left")
     this.eat = new Buttonbar("eat", "right")
