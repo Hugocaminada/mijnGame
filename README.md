@@ -2,6 +2,8 @@
 Deze game heb ik gemaakt voor CLE4.
 Aangezien ik alle typescript heb geschreven voor deze levels, dien ik deze levels ook in voor mijn Programmeer opdracht. 
 
+# Classes
+
 Ik heb veel verschillende Classes toegevoegd.
 Ik heb bijvoorbeeld de class 'Buttonbar' bedacht voor alle buttons en hun corresponderende progress bars. Hier roep ik er elk level een van op elke keer met een andere waarde. Aan de hand van die waarde krijgen ze hun eigen kleur, icoon en score in de game.
 
@@ -11,6 +13,8 @@ Ik heb bijvoorbeeld de class 'Buttonbar' bedacht voor alle buttons en hun corres
     this.exercise = new Buttonbar("exercise", "right") 
     this.play = new Buttonbar("play", "left")
     this.learn = new Buttonbar("learn", "right")
+    
+# Encapsulation
 
 Encapsulation heb ik 1x toegepast. Dit om de waarde van de score in de buttonbars terug te geven aan de levels zodat die weer de health kunnen bepalen:
 
@@ -23,8 +27,12 @@ dit is in de buttonbar:
 dit is in het fishlevel:
 
     this.health = (this.eat.getScore + this.sleep.getScore) / 2
+    
+# Composition
 
 Ik heb ook gebruik gemaakt van Composition. Mijn buttonbar classes zitten in elk level. Elk level kent dus verschillende button bars. Maar de buttonbar kent de levels niet. Vandaar ook de getter die ik hierboven heb aangeduid om toch de buttonbar score terug te geven aan de levels. Ook heb ik nog een healthbar en een animal class die elk level aanroept.
+
+# Inheritance
     
 Inheritance heb ik heel veel gebruikt. Ik heb een 'basis' <code>Level</code> gemaakt waar alle variabelen en functies inzitten die in elk level zitten. Deze wordt ingeladen bij het eerste level <code>Fishlevel</code>: 
 
