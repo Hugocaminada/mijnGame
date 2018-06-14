@@ -3,7 +3,7 @@ Deze game heb ik gemaakt voor CLE4.
 Aangezien ik alle typescript heb geschreven voor deze levels, dien ik deze levels ook in voor mijn Programmeer opdracht. 
 
 Ik heb veel verschillende Classes toegevoegd.
-Ik heb bijvoorbeeld de class 'Buttonbar' bedacht voor alle buttons en hun corresponderende progress bars. Deze roep ik per level meerdere keren aan met verschillende waardes.
+Ik heb bijvoorbeeld de class 'Buttonbar' bedacht voor alle buttons en hun corresponderende progress bars. Hier roep ik er elk level een van op elke keer met een andere waarde. Aan de hand van die waarde krijgen ze hun eigen kleur, icoon en score in de game.
 
     this.sleep = new Buttonbar("sleep", "left")
     this.eat = new Buttonbar("eat", "right")
@@ -20,49 +20,31 @@ dit is in de buttonbar:
       return this.score;
     }
 
-dit is in het level:
+dit is in het fishlevel:
 
     this.health = (this.eat.getScore + this.sleep.getScore) / 2
 
-Ik heb ook gebruik gemaakt van Composition 
-
-    this.game.showScreen(new Lizardlevel(this.game))
-    private game : Game , constructor(g:Game){..} , this.game = g
+Ik heb ook gebruik gemaakt van Composition. Mijn buttonbar classes zitten in elk level. Elk level kent dus verschillende button bars. Maar de buttonbar kent de levels niet. Vandaar ook de getter die ik hierboven heb aangeduid om toch de buttonbar score terug te geven aan de levels. Ook heb ik nog een healthbar en een animal class die elk level aanroept.
     
-Inheritance heb ik gebruikt bij de verschillende levels. Deze lijken namelijk wel veel op elkaar maar zijn ieder iets verschillend. Ik heb dus een gameLevelObject.ts gemaakt waar alle gemeenschappelijke variabelen inzitten:
+Inheritance heb ik heel veel gebruikt. Ik heb een 'basis' <code>Level</code> gemaakt waar alle variabelen en functies inzitten die in elk level zitten. Deze wordt ingeladen bij het eerste level <code>Fishlevel</code>: 
 
-```
-class GameLevelObject {
+    /// <reference path="level.ts" />
 
-    protected healthbar : Healthbar
-    protected game : Game
-    protected animalName : HTMLElement
-    protected buttonwrapper : HTMLElement
-    protected eat : Buttonbar
-    protected sleep : Buttonbar
-    protected health : number
-    protected drink : Buttonbar
-    protected exercise : Buttonbar
-    protected play : Buttonbar
-    protected learn : Buttonbar
-    protected gameScore : number = 0
-    protected scoreText : HTMLElement
-    protected gameScoreElement : HTMLElement
-    protected textfield : HTMLElement
-    protected text : string = "Hoi daar ben ik weer!"
-    protected counter : number = 0
-    protected modal : Modal
-
-    constructor() {
+    class Fishlevel extends Level{
+        protected sleep : Buttonbar
+        protected eat : Buttonbar
         
-        this.healthbar = new Healthbar()
-        
+Hij stuurt ook wat waardes mee naar de super, zoals de unieke animal tekening en naam en de background, ook de <code>this</code> van de game stuurt hij mee om later het nieuwe level te kunnen aanroepen.
+
+    constructor(backgroundImage: string, animalName: string, g:Game){
+        super(backgroundImage, animalName, g)
+
+        this.sleep = new Buttonbar("sleep", "left")
+        this.eat = new Buttonbar("eat", "right")
     }
-
-}
-```
-
-Deze roep ik in elk level aan. 
+    
+Het tweede level <code>Lizardlevel</code> is weer een child van het <code>Fishlevel</code>. Hierdoor krijgt hij alles uit de <code>super()</code> van het 'basis' <code>Level</code> en van de <code>super()</code> van het <code>Fishlevel</code>, hier voegt hij dan ook nog zijn eigen code aan toe. Dit gaat zo door totaan het laatste level <code>Humanlevel</code>
+    
 
 # Peer review:
 Ik review de game van Ismail [Link](https://github.com/IsmailHusseinCR/gamepr4)
