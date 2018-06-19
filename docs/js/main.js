@@ -329,7 +329,7 @@ var Monkeylevel = (function (_super) {
     }
     Monkeylevel.prototype.changeLevel = function () {
         this.game.emptyScreen();
-        this.game.showScreen(new Humanlevel("level 6", "Homo Sapien", this.game));
+        this.game.showScreen(new Humanlevel("level6", "Mens", this.game));
     };
     Monkeylevel.prototype.update = function () {
         this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore + this.exercise.getScore + this.play.getScore) / 5;

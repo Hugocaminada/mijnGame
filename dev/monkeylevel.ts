@@ -14,7 +14,7 @@ class Monkeylevel extends Mammallevel{
 
     protected changeLevel(){
             this.game.emptyScreen()
-            this.game.showScreen(new Humanlevel("level 6", "Homo Sapien", this.game))
+            this.game.showScreen(new Humanlevel("level6", "Mens", this.game))
     }
 
     public update() {
