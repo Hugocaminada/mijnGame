@@ -12,12 +12,12 @@ class Lizardlevel extends Fishlevel{
 
     }
 
-    protected changeLevel(){
+    protected changeLevel() : void{
         this.game.emptyScreen()
         this.game.showScreen(new Mammallevel("level4", "Thrinaxodon", this.game))
     }
 
-    public update() {
+    public update() : void{
         this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore) / 3
         this.eat.update()
         this.sleep.update()
@@ -25,7 +25,7 @@ class Lizardlevel extends Fishlevel{
         this.healthbar.drawPointer(this.health)
     }
 
-    protected changeText(){
+    protected changeText() : void{
         this.counter += 1
 
         switch(this.counter) {
@@ -36,7 +36,6 @@ class Lizardlevel extends Fishlevel{
                 this.modal.closeModalByWindow()
                 break
         }
-        console.log(this.counter)
         this.updateText(this.text)
     }
 

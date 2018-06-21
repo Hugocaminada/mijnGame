@@ -12,23 +12,23 @@ class Monkeylevel extends Mammallevel{
 
     }
 
-    protected changeLevel(){
+    protected changeLevel() : void{
             this.game.emptyScreen()
             this.game.showScreen(new Humanlevel("level6", "Mens", this.game))
     }
 
-    public update() {
+    public update() : void{
         this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore + this.exercise.getScore + this.play.getScore) / 5
         this.eat.update()
         this.sleep.update()
         this.drink.update()
         this.exercise.update()
         this.play.update()
-
+        
         this.healthbar.drawPointer(this.health)
     }
 
-    protected changeText(){
+    protected changeText() : void{
         this.counter += 1
 
         switch(this.counter) {

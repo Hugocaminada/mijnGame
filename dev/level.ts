@@ -58,7 +58,7 @@ class Level {
         window.addEventListener("click", (e:Event) => this.changeText())
     }
 
-    protected updateGameScore(){
+    protected updateGameScore() : void{
         setTimeout(() => {
             if(this.health > 80){
                 this.gameScore += 1
@@ -71,7 +71,7 @@ class Level {
         }, 100)
     }
 
-    protected createButton(){
+    protected createButton() : void{
         let button = document.createElement("button")
         button.id = "evolvebutton"
         button.innerHTML = "Evolueer!"
@@ -79,15 +79,15 @@ class Level {
         button.addEventListener("click", (e:Event) => this.changeLevel());
     }
 
-    protected changeLevel(){
+    protected changeLevel() : void{
         
     }
 
-    public update() {
+    public update() : void{
 
     }
 
-    protected changeText(){
+    protected changeText() : void {
     
     }
 

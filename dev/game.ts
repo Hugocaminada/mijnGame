@@ -1,6 +1,6 @@
 class Game {
     
-    private currentscreen: Level 
+    private currentscreen : Level 
 
     constructor() {
         this.currentscreen = new Fishlevel("level2", "Cephalaspis", this)
@@ -8,17 +8,17 @@ class Game {
         this.gameLoop()
     }
 
-    private gameLoop():void{
+    private gameLoop() : void{
         this.currentscreen.update()
         requestAnimationFrame(() => this.gameLoop())
     }
 
-    public emptyScreen(){
+    public emptyScreen() : void{
         let forground = document.getElementsByTagName("forground")[0]
         forground.innerHTML = ""
     }
 
-    public showScreen(screen: Level){
+    public showScreen(screen : Level){
         this.currentscreen = screen
     }
 

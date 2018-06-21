@@ -1,22 +1,20 @@
 class Healthbar {
 
-    private bar: HTMLElement
     private healthPointer: HTMLElement
     private pointerPosition: number
-    
 
     constructor(){
 
         let forground = document.getElementsByTagName("forground")[0]
-        this.bar = document.createElement("healthbar")
-        forground.appendChild(this.bar)
+        let bar = document.createElement("healthbar")
+        forground.appendChild(bar)
 
         this.healthPointer = document.createElement("healthpointer")
-        this.bar.appendChild(this.healthPointer)
+        bar.appendChild(this.healthPointer)
     }
 
 
-    public drawPointer(healthScore){
+    public drawPointer(healthScore) : void{
         this.pointerPosition = healthScore * 4
         this.healthPointer.style.transform = "translate("+-this.pointerPosition+"px)"
     }

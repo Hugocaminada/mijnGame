@@ -12,19 +12,19 @@ class Fishlevel extends Level{
         this.eat = new Buttonbar("eat", "right")
     }
 
-    protected changeLevel(){
+    protected changeLevel() : void {
         this.game.emptyScreen()
         this.game.showScreen(new Lizardlevel("level3", "Tiktaalik", this.game))
     }
 
-    public update() {
+    public update() : void{
         this.health = (this.eat.getScore + this.sleep.getScore) / 2
         this.eat.update()
         this.sleep.update()
         this.healthbar.drawPointer(this.health)
     }
     
-    protected changeText(){
+    protected changeText() : void{
         this.counter += 1
 
         switch(this.counter) {

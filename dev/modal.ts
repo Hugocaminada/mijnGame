@@ -21,7 +21,7 @@ class Modal {
         
     }
 
-    public closeModalByWindow() {
+    public closeModalByWindow() : void {
         this.modal.style.display = "none";
     }
 

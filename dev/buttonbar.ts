@@ -1,15 +1,14 @@
 class Buttonbar {
 
-    private bar:HTMLElement
-    private button:HTMLElement
-    private img: HTMLImageElement
-    private pointer: HTMLElement
-
-    private pointerWidth: number 
-    private score: number = 50
+    private bar : HTMLElement
+    private button : HTMLElement
+    private img : HTMLImageElement
+    private pointer : HTMLElement
+    private pointerWidth : number 
+    private score : number = 50
     private buttonCounter : number = 0
 
-    public get getScore(): number {
+    public get getScore() : number {
 		return this.score;
 	}
 
@@ -38,12 +37,12 @@ class Buttonbar {
         this.lowerScore()
     }
 
-    public update(){
+    public update() : void {
         this.checkButtonOpacity()
         this.drawPointer()
     }
     
-    private buttonClickChecker(){
+    private buttonClickChecker() : void{
         
         if (this.buttonCounter < 3){
             this.buttonCounter += 1
@@ -52,7 +51,7 @@ class Buttonbar {
         this.checkButtonCounter()
     }
 
-    private checkButtonCounter(){
+    private checkButtonCounter() : void{
         if (this.buttonCounter == 3){
             setTimeout(() => {
                 this.buttonCounter = 0
@@ -60,13 +59,13 @@ class Buttonbar {
         }
     }
 
-    private movePointer(){
+    private movePointer() : void{
         if(this.score < 100){
             this.score += 5
         }
     }
 
-    private lowerScore(){
+    private lowerScore() : void{
         setTimeout(() => {
             if(this.score > 0){
                 this.score -= 1
@@ -75,7 +74,7 @@ class Buttonbar {
         }, Math.random() * 10000 + 7000)
     }
 
-    private drawPointer(){
+    private drawPointer() : void{
         this.pointerWidth = this.score * 1
         this.pointer.style.width = this.pointerWidth+"%";
         if(this.score >= 100){

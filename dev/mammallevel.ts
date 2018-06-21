@@ -12,12 +12,12 @@ class Mammallevel extends Lizardlevel{
 
     }
 
-    protected changeLevel(){
+    protected changeLevel() : void{
             this.game.emptyScreen()
             this.game.showScreen(new Monkeylevel("level5", "Procunsul", this.game))
     }
 
-    public update() {
+    public update() : void{
         this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore + this.exercise.getScore) / 4
         this.eat.update()
         this.sleep.update()
@@ -26,7 +26,7 @@ class Mammallevel extends Lizardlevel{
         this.healthbar.drawPointer(this.health)
     }
 
-    protected changeText(){
+    protected changeText() : void{
         this.counter += 1
 
         switch(this.counter) {

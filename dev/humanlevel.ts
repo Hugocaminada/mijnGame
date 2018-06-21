@@ -13,7 +13,7 @@ class Humanlevel extends Monkeylevel{
         this.updateGameScore()
     }
 
-    protected updateGameScore(){
+    protected updateGameScore() : void{
         setTimeout(() => {
             if(this.health > 80){
                 this.gameScore += 1
@@ -23,11 +23,11 @@ class Humanlevel extends Monkeylevel{
         }, 100)
     }
 
-    protected createButton(){
+    protected createButton() : void{
 
     }
 
-    public update() {
+    public update() : void{
         this.health = (this.eat.getScore + this.sleep.getScore + this.drink.getScore + this.exercise.getScore + this.play.getScore + this.learn.getScore) / 6
         this.eat.update()
         this.sleep.update()
@@ -39,7 +39,7 @@ class Humanlevel extends Monkeylevel{
         this.healthbar.drawPointer(this.health)
     }
 
-    protected changeText(){
+    protected changeText() : void{
 
         this.modal.closeModalByWindow()
 
