@@ -7,7 +7,9 @@ Er zijn 5 levels te spelen. Als eerste speel je als de eerste vis-achtige, daarn
 Je kunt hem hier spelen: https://stud.hosted.hr.nl/0940329/Darwingame/
 
 Als extra uitdagingen heb ik gekozen voor:
+
 • De game ziet er zeer verzorgd uit dankzij goed uitgewerkt UI design en artwork.
+
 • De game werkt op mobiele schermen en ondersteunt touchscreen controls.
 
 # Classes
