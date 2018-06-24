@@ -1,8 +1,14 @@
-# EVOLIFE
+# Darwingame
 Deze game heb ik gemaakt voor CLE4.
 Aangezien ik alle typescript heb geschreven voor deze levels, dien ik deze levels ook in voor mijn Programmeer opdracht. 
 Het is een Tamagotchi-achtig spel waarin de evolutie wordt gesimuleerd. Charles Darwin leidt je door elk level heen om je dingen uit te leggen over de evolutie.
 Er zijn 5 levels te spelen. Als eerste speel je als de eerste vis-achtige, daarna ga je over naar de eerste reptiel-achtige, en zo door langs de eerste zoogdier, naar de aap en vervolgens de mens.
+
+Je kunt hem hier spelen: https://stud.hosted.hr.nl/0940329/Darwingame/
+
+Als extra uitdagingen heb ik gekozen voor:
+• De game ziet er zeer verzorgd uit dankzij goed uitgewerkt UI design en artwork.
+• De game werkt op mobiele schermen en ondersteunt touchscreen controls.
 
 # Classes
 
